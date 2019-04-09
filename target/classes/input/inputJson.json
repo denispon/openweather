@@ -1,0 +1,14 @@
+{
+   {
+      "city_name":London,
+      "city_id ":9,
+      "frequency ":20,
+      "threshold ":10
+   },
+   {
+      "city_name":Denver,
+      "city_id ":34,
+      "frequency ":8,
+      "threshold ":5.1
+   }
+}
