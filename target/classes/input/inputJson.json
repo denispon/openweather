@@ -1,14 +1,33 @@
+[{
+	"city_name": "London",
+	"city_id": 9,
+	"frequency": 20,
+	"threshold": 10
+},
 {
-   {
-      "city_name":London,
-      "city_id ":9,
-      "frequency ":20,
-      "threshold ":10
-   },
-   {
-      "city_name":Denver,
-      "city_id ":34,
-      "frequency ":8,
-      "threshold ":5.1
+	"city_name": "Denver",
+	"city_id": 34,
+	"frequency": 8,
+	"threshold": 5.1
+},
+{
+ 	"city_name": "Tokyo",
+ 	"frequency": 16,
+ 	"threshold": 20
+ },
+ {
+ 	"city_name": "Muscat",
+ 	"frequency": 16,
+ 	"threshold": 20
+ },
+ {
+  	"city_name": "Paris",
+  	"frequency": 16,
+  	"threshold": 20
+  },
+  {
+   	"city_name": "Tel Aviv",
+   	"frequency": 16,
+   	"threshold": 20
    }
-}
+ ]

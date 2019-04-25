@@ -1,27 +1,68 @@
 import entities.Request;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import utils.HttpUtils;
+import entities.Response;
+import services.MessageSender;
 import utils.JsonUtils;
+import utils.Utils;
 
-import java.io.FileReader;
-import java.io.IOException;
+import java.util.*;
 
 public class App {
 
     public static void main(String[] args){
 
-        JSONParser parser = new JSONParser();
+        List<Request> requests = JsonUtils.createRequests("C:\\Users\\Denis\\Desktop\\codingLab\\openweather\\src\\main\\resources\\input\\inputJson.json");
+
+        List<MessageSender> messageSenders = new ArrayList<>();
+        int i = 0;
+        for(Request request : requests){
+            messageSenders.add(new MessageSender(request, "sender " + i++));
+
+        }
 
         try {
-            Object obj = parser.parse(new FileReader("C:\\Users\\Denis\\Desktop\\codingLab\\openweather\\src\\main\\resources\\input\\inputJsonSingle.json"));
-            JSONObject jsonRequest = (JSONObject)obj;
-            Request request = JsonUtils.mapJsonObjectToRequest(jsonRequest);
-            HttpUtils.sendGet(request);
-        } catch (ParseException | IOException e) {
+            Thread.sleep(60000);
+        } catch (InterruptedException e) {
             e.printStackTrace();
-         }
+        }
+
+        for(MessageSender sender: messageSenders){
+            sender.stopSafely();
+        }
+
+        Map<String, List<Response>> responseMap = new HashMap<>();
+        List<Response> responses = new ArrayList<>();
+        for (MessageSender sender : messageSenders){
+            responseMap.put(sender.getSenderName(), sender.getResponses());
+            responses.addAll(sender.getResponses());
+        }
+
+
+        Collections.sort(responses, Utils.cityNameComparator);
+        System.out.println("Sorted by city names");
+
+        for(Response response : responses){
+            System.out.println(response);
+        }
+
+        System.out.println("#######################################################################");
+
+        Collections.sort(responses, Utils.temperatureComparator);
+        System.out.println("Sorted by temperature");
+
+        for(Response response : responses){
+            System.out.println(response);
+        }
+
+
+        /*for(String workerName : responseMap.keySet()){
+            System.out.println(workerName + " :");
+            for(Response response : responseMap.get(workerName)){
+                System.out.println(response.toString());
+                System.out.println("----------------------------------------------------------------------------");
+            }
+            System.out.println("###################################################################################");
+        }*/
+
 
     }
 }

@@ -46,6 +46,13 @@ public class Request {
         this.threshold = threshold;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Request{" +
+                "cityName='" + cityName + '\'' +
+                ", cityId=" + cityId +
+                ", frequency=" + frequency +
+                ", threshold=" + threshold +
+                '}';
+    }
 }
