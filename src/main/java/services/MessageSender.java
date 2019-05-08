@@ -13,7 +13,6 @@ public class MessageSender implements Runnable {
     private int numOfRequests = 0;
     private String senderName;
     private Request request;
-    private Boolean runFlag = Boolean.TRUE;
     private List<Response> responses = new ArrayList<>();
     private Thread worker;
 
@@ -27,7 +26,7 @@ public class MessageSender implements Runnable {
 
 
     public void stopSafely(){
-        while(this.worker.getState()!= Thread.State.RUNNABLE){
+        while(this.worker.getState()== Thread.State.RUNNABLE){
 
         }
         this.worker.interrupt();
@@ -57,16 +56,6 @@ public class MessageSender implements Runnable {
         System.out.println("Receiving response for weather cast in  " + request.getCityName() +" - END "+Thread.currentThread().getName());
 
     }
-
-
-    public Boolean getRunFlag() {
-        return runFlag;
-    }
-
-    public void setRunFlag(Boolean runFlag) {
-        this.runFlag = runFlag;
-    }
-
 
     public List<Response> getResponses() {
         return responses;
